@@ -26,10 +26,12 @@ class AuthJwtController extends Controller
         ];
         $validator =  Validator(request()->all(),$rules);
         if($validator->fails()){
-            return response()->json(['success'=>false,'type'=>'validator','data' => $validator->errors()]);
+            return $this->responseValidator( $validator->errors());
         }
+
         if (! $token = auth()->attempt($credentials)) {
-            return response()->json(['error' => 'Unauthorized'], 401);
+            return $this->responseValidator(['email'=>[trans('auth.failed')]]);
+     
         }
 
         return $this->respondWithToken($token);
@@ -39,8 +41,8 @@ class AuthJwtController extends Controller
     public function me()
     {
         if(!auth()->check())
-        return response()->json(['success'=>false,'message'=>'401']);
-        return response()->json(auth()->user());
+        return $this->responseMessage('401');
+        return $this->responseData(auth()->user());
     }
 
     
