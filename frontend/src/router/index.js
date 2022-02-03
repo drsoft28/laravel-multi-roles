@@ -34,9 +34,8 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import( '../views/dashboard/profil.vue'),
-    meta:{auth:true}
+    meta:{layout:'layout-auth',auth:true}
   },
-  
   {
     path: '/settings',
     name: 'settings',
@@ -44,6 +43,15 @@ const routes = [
     // this generates a separate chunk (about.[hash].js) for this route
     // which is lazy-loaded when the route is visited.
     component: () => import( '../views/dashboard/settings.vue'),
+    meta:{layout:'layout-auth',auth:true}
+  },
+  {
+    path: '/roles',
+    name: 'roles',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import( '../views/roles/index.vue'),
     meta:{layout:'layout-auth',auth:true}
   }
 ]

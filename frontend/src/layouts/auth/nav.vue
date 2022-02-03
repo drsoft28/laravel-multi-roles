@@ -13,9 +13,9 @@
         <v-list-item link>
           <v-list-item-content>
             <v-list-item-title class="text-h6">
-              John Leider
+              {{user.name}}
             </v-list-item-title>
-            <v-list-item-subtitle>john@vuetifyjs.com</v-list-item-subtitle>
+            <v-list-item-subtitle>{{user.email}}</v-list-item-subtitle>
           </v-list-item-content>
 
           <v-list-item-action>
@@ -35,6 +35,7 @@
           <v-list-item
             v-for="(item, i) in items"
             :key="i"
+            :to="item.link"
           >
             <v-list-item-icon>
               <v-icon v-text="item.icon"></v-icon>
@@ -72,9 +73,10 @@ export default {
         drawer_local:true,
          selectedItem: 0,
       items: [
-        { text: 'Home', icon: 'mdi-home' },
-        { text: 'Profil', icon: 'mdi-account' },
-         { text: 'Settings', icon: 'mdi-cog' },
+        { text: 'Home', icon: 'mdi-home',link:'/dashboard' },
+        { text: 'Profil', icon: 'mdi-account',link:'/profil' },
+         { text: 'Settings', icon: 'mdi-cog',link:'/settings' },
+           { text: 'Roles', icon: 'mdi-police-badge',link:'/roles' },
       ],
     }),
     methods:{

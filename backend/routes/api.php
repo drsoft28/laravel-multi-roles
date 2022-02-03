@@ -17,16 +17,31 @@ use Illuminate\Support\Facades\Route;
 //Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
  //   return $request->user();
 //});
+Route::group([
+   
+    
+
+], function () {
+
+    Route::post('auth/login', 'AuthJwtController@login');
+    
+
+});
 
 Route::group([
+    'middleware' => 'jwt.auth',
 
-    'prefix' => 'auth'
 
-], function ($router) {
+], function () {
 
-    Route::post('login', 'AuthJwtController@login');
-    Route::post('logout', 'AuthJwtController@logout');
-    Route::post('refresh', 'AuthJwtController@refresh');
-    Route::post('me', 'AuthJwtController@me');
+    Route::post('auth/logout', 'AuthJwtController@logout');
+    Route::post('auth/refresh', 'AuthJwtController@refresh');
+    Route::post('auth/me', 'AuthJwtController@me');
+    Route::prefix('roles')->group(function () {
+        Route::post('/', 'Roles\RolesController@index');
+        Route::post('/update', 'Roles\RolesController@update');
+        Route::post('/store', 'Roles\RolesController@store');
+        Route::post('/destroy', 'Roles\RolesController@destroy');
+    });
 
 });

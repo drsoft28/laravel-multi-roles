@@ -96,7 +96,7 @@ methods:{
                 }
             }
         } catch (error) {
-            console.log(error)
+            console.log('error',error)
         }
         this.processing = false;
     }
