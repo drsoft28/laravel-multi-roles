@@ -1,0 +1,2 @@
+(window["webpackJsonp"]=window["webpackJsonp"]||[]).push([["chunk-2d0a481e"],{"0778":function(n,e,t){"use strict";t.r(e);var a=function(){var n=this,e=n.$createElement,t=n._self._c||e;return t("v-card",[n._v(" settings ")])},c=[],r={},s=r,u=t("2877"),l=t("6544"),i=t.n(l),o=t("b0af"),d=Object(u["a"])(s,a,c,!1,null,null,null);e["default"]=d.exports;i()(d,{VCard:o["a"]})}}]);
+//# sourceMappingURL=chunk-2d0a481e.3cec286e.js.map

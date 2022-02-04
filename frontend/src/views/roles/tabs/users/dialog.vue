@@ -16,7 +16,7 @@
               name="user">
               <v-autocomplete
                 v-model="item.user_id"
-                label="name"
+                label="user"
                 :items="users"
                 item-text="name"
                 item-value="id"

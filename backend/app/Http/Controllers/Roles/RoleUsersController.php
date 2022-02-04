@@ -34,7 +34,7 @@ class RoleUsersController extends Controller
         ->whereRaw('user_id=?',[request('user_id')])
         ->selectRaw('user_roles.*,users.name,users.email')
         ->first();
-        return $this->responseData(new Resources\RoleResource($user));
+        return $this->responseData(new Resources\RoleUsersResource($user));
     }
     public function destroy()
     {

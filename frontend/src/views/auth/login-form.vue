@@ -19,7 +19,7 @@
                   <ValidationProvider
                   name="Email"
                                  vid="email"
-                                 rules="required|email"
+                                 rules="required"
                    v-slot="{errors}">
                   <v-text-field
                   v-model="form.email"
@@ -81,22 +81,24 @@ methods:{
         try {
             let {data} = await this.axios.post('auth/login',this.form);
             if(data.success){
-                let token = data.data.access_token;
+               // let token = data.data.access_token;
                 
-                let user = data.data.user;
-                window.store.commit('auth/SET_TOKEN',token) ;
-                  window.store.commit('auth/SET_USER',user);
-                  this.$router.push('/dashboard')
+               // let user = data.data.user;
+                this.$emit('login',data.data)
+                //window.store.commit('auth/SET_TOKEN',token) ;
+                  //window.store.commit('auth/SET_USER',user);
+                 // this.$router.push('/dashboard')
             }else{
                 if(data.type=='validator')
                 this.$refs.form.setErrors(data.data);
                 if(data.type=='message'){
-                    console.log('Message error',data.data)
-                    alert(data.data)
+                    //console.log('Message error',data.data)
+                    window.Toast.fire({icon: 'error', title: data.data }) 
                 }
             }
         } catch (error) {
             console.log('error',error)
+            window.Toast.fire({icon: 'error', title: error.message }) 
         }
         this.processing = false;
     }

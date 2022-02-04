@@ -53,6 +53,15 @@ const routes = [
     // which is lazy-loaded when the route is visited.
     component: () => import( '../views/roles/index.vue'),
     meta:{layout:'layout-auth',auth:true}
+  },
+  {
+    path: '/users',
+    name: 'users',
+    // route level code-splitting
+    // this generates a separate chunk (about.[hash].js) for this route
+    // which is lazy-loaded when the route is visited.
+    component: () => import( '../views/users/index.vue'),
+    meta:{layout:'layout-auth',auth:true}
   }
 ]
 
@@ -62,4 +71,5 @@ const router = new VueRouter({
 router.beforeEach((to,from,next)=>{
   middlewiare_auth(to,from,next)
 })
+window.router = router;
 export default router

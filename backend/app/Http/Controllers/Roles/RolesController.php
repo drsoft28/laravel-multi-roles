@@ -9,8 +9,15 @@ class RolesController extends Controller
 {
     public function index()
     {
+        
         $roles = Role::all();
         return $this->responseData(new Resources\RoleCollection($roles));
+    }
+    public function listOnly()
+    {
+        
+        $roles = Role::all();
+        return $this->responseData( Resources\RoleResource::Collection($roles));
     }
     public function store()
     {

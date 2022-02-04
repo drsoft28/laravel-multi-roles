@@ -28,7 +28,7 @@
         target="_blank"
         text
       >
-        <span class="mr-2">{{user.name}}</span>
+        <span v-if="user" class="mr-2">{{user.name}}</span>
         <v-icon>mdi-open-in-new</v-icon>
       </v-btn>
     </v-app-bar>

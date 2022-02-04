@@ -94,7 +94,10 @@
         Users
         
       </v-tab>
-
+    <v-tab href="#tab-2">
+        Sidebar
+        
+      </v-tab>
      
     </v-tabs>
 
@@ -110,6 +113,17 @@
           </v-card-text>
         </v-card>
       </v-tab-item>
+      <v-tab-item
+       
+        :value="'tab-2'"
+      >
+        <v-card flat>
+          <v-card-text>
+
+            <TabSidebar v-if="selected.length==1" :parent-item="selected[0]" /> 
+          </v-card-text>
+        </v-card>
+      </v-tab-item>
     </v-tabs-items>
   </v-card>
   </v-col>
@@ -118,10 +132,11 @@
 <script>
 import EditDialog from './dialog.vue'
 import TabUser from './tabs/users/index.vue'
+import TabSidebar from './tabs/sidebar/index.vue'
   export default {
       components:{
         EditDialog,
-        TabUser
+        TabUser,TabSidebar
       },
     data: () => ({
       tab:0,

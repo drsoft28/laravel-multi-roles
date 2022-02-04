@@ -48,7 +48,11 @@ _axios.interceptors.response.use(
 
         console.log(error);
         if (error.response) {
-           //
+           console.log('error.response',error.response)
+           if(error.response.status==401){
+               window.store.commit('auth/CLEAR_AUTH')
+                window.router.push('/login');
+           }
 
         }
         // Do something with response error

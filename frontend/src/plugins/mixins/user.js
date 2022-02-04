@@ -8,6 +8,8 @@ const Validation = {
             computed: {
                 ...mapGetters({
                     user: 'auth/user',
+                    role_sidebar: 'auth/sidebar',
+                    user_role_name: 'auth/role',
                     token: 'auth/token',
                     authenticated: 'auth/authenticated',
                    
