@@ -37,11 +37,24 @@ Route::group([
     Route::post('auth/logout', 'AuthJwtController@logout');
     Route::post('auth/refresh', 'AuthJwtController@refresh');
     Route::post('auth/me', 'AuthJwtController@me');
-    Route::prefix('roles')->group(function () {
-        Route::post('/', 'Roles\RolesController@index');
-        Route::post('/update', 'Roles\RolesController@update');
-        Route::post('/store', 'Roles\RolesController@store');
-        Route::post('/destroy', 'Roles\RolesController@destroy');
+    Route::prefix('roles')->namespace('Roles')->group(function () {
+        Route::post('/', 'RolesController@index');
+        Route::post('/update', 'RolesController@update');
+        Route::post('/store', 'RolesController@store');
+        Route::post('/destroy', 'RolesController@destroy');
+        //user roles
+        Route::prefix('users')->group(function () {
+            Route::post('/', 'RoleUsersController@index');           
+            Route::post('/store', 'RoleUsersController@store');
+            Route::post('/destroy', 'RoleUsersController@destroy');
+        });
+    });
+    Route::prefix('users')->group(function () {
+        Route::post('/', 'Users\UsersController@index');
+        Route::post('/list-only', 'Users\UsersController@listOnly');
+        Route::post('/update', 'Users\UsersController@update');
+        Route::post('/store', 'Users\UsersController@store');
+        Route::post('/destroy', 'Users\UsersController@destroy');
     });
 
 });

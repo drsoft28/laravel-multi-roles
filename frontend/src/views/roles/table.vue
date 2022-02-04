@@ -1,5 +1,11 @@
 <template>
+<v-row>
+  <v-col md="12">
   <v-data-table
+  v-model="selected"
+  :single-select="true"
+    item-key="id"
+    show-select
     :headers="headers"
     :items="desserts"
     sort-by="calories"
@@ -16,15 +22,24 @@
           vertical
         ></v-divider>
         <v-spacer></v-spacer>
-      <v-btn
-              color="primary"
-              dark
-              class="mb-2"
-            
-            @click="newItem"
-            >
-              New Item
-            </v-btn>
+       <v-btn 
+         class="mx-2"
+      fab
+      dark
+      x-small
+         color="primary" 
+          @click="initialize">
+          <v-icon>mdi-refresh</v-icon>
+        </v-btn>
+        <v-btn  
+         class="mx-2"
+      fab
+      dark
+      x-small
+        color="primary" 
+          @click="newItem">
+          <v-icon>mdi-plus</v-icon>
+        </v-btn>
             <EditDialog @store="storeItem" @update="updateItem" :url="url" @close="closeDialog" v-if="dialog" :dialog.sync="dialog" :editedItem="editedItem" />
         <v-dialog v-model="dialogDelete" max-width="500px">
           <v-card>
@@ -63,14 +78,54 @@
       </v-btn>
     </template>
   </v-data-table>
+  </v-col>
+  <v-col md="12">
+    <v-card>
+    <v-tabs
+      v-model="tab"
+    
+      
+      
+      icons-and-text
+    >
+      <v-tabs-slider></v-tabs-slider>
+
+      <v-tab href="#tab-1">
+        Users
+        
+      </v-tab>
+
+     
+    </v-tabs>
+
+    <v-tabs-items v-model="tab">
+      <v-tab-item
+       
+        :value="'tab-1'"
+      >
+        <v-card flat>
+          <v-card-text>
+
+            <TabUser v-if="selected.length==1" :parent-item="selected[0]" /> 
+          </v-card-text>
+        </v-card>
+      </v-tab-item>
+    </v-tabs-items>
+  </v-card>
+  </v-col>
+</v-row>
 </template>
 <script>
 import EditDialog from './dialog.vue'
+import TabUser from './tabs/users/index.vue'
   export default {
       components:{
-        EditDialog
+        EditDialog,
+        TabUser
       },
     data: () => ({
+      tab:0,
+      selected:[],
         url:'roles',
       dialog: false,
       dialogDelete: false,
@@ -126,7 +181,7 @@ import EditDialog from './dialog.vue'
         },
     async  initialize () {
         try {
-            let {data} = await this.$axios.post('roles')
+            let {data} = await this.$axios.post(this.url)
             if(data.success){
                 this.desserts = data.data.list
             }
